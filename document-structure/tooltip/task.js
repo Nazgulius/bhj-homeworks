@@ -31,7 +31,6 @@ hasTooltip.item(0).addEventListener(
       if (i !== 0) {
         if (tooltip.item(i).classList.contains('tooltip_active')) {
           tooltip.item(i).classList.remove('tooltip_active');  
-          console.log(i);      
         } 
       }  
     }    
@@ -46,7 +45,6 @@ hasTooltip.item(1).addEventListener(
       if (i !== 1) {
         if (tooltip.item(i).classList.contains('tooltip_active')) {
           tooltip.item(i).classList.remove('tooltip_active');  
-          console.log(i);      
         } 
       }  
     }    
@@ -60,7 +58,6 @@ hasTooltip.item(2).addEventListener(
       if (i !== 2) {
         if (tooltip.item(i).classList.contains('tooltip_active')) {
           tooltip.item(i).classList.remove('tooltip_active');  
-          console.log(i);      
         } 
       }  
     }    
@@ -73,8 +70,7 @@ hasTooltip.item(3).addEventListener(
     for (let i = 0; i < tooltip.length; i++) {
       if (i !== 3) {
         if (tooltip.item(i).classList.contains('tooltip_active')) {
-          tooltip.item(i).classList.remove('tooltip_active');  
-          console.log(i);      
+          tooltip.item(i).classList.remove('tooltip_active'); 
         } 
       }  
     }    
@@ -87,8 +83,7 @@ hasTooltip.item(4).addEventListener(
     for (let i = 0; i < tooltip.length; i++) {
       if (i !== 4) {
         if (tooltip.item(i).classList.contains('tooltip_active')) {
-          tooltip.item(i).classList.remove('tooltip_active');  
-          console.log(i);      
+          tooltip.item(i).classList.remove('tooltip_active');
         } 
       }  
     }    
@@ -101,8 +96,7 @@ hasTooltip.item(5).addEventListener(
     for (let i = 0; i < tooltip.length; i++) {
       if (i !== 5) {
         if (tooltip.item(i).classList.contains('tooltip_active')) {
-          tooltip.item(i).classList.remove('tooltip_active');  
-          console.log(i);      
+          tooltip.item(i).classList.remove('tooltip_active'); 
         } 
       }  
     }    

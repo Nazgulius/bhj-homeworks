@@ -4,7 +4,7 @@
 
 .has-tooltip {
   color: #000;
-  background: yellow;
+  background: yellow; 
 }
 
 .has-tooltip:hover {
@@ -12,7 +12,7 @@
 }
 
 .tooltip {
-  position: fixed;
+  position: fixed;   
   display: none;
   background: black;
   padding: 5px;
@@ -21,5 +21,10 @@
 }
 
 .tooltip_active {
-  display: block;
+  display: block;    
+}
+
+[data-position = "top"] {
+  top: 10%;
+  left: 45%;
 }
