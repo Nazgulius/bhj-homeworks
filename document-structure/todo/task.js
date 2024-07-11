@@ -6,7 +6,7 @@ form.addEventListener(
   'submit',
   (event) => {
     event.preventDefault();
-    if(text.value.length > 0){
+    if(text.value.trim().length > 0){
       tasksList.insertAdjacentHTML('beforeEnd',
         `<div class="task">
           <div class="task__title">

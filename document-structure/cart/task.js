@@ -1,17 +1,17 @@
 let productQuantityValue = document.querySelectorAll('.product__quantity-value');
-let productQuantityControlDec = document.querySelectorAll('.product__quantity-control_dec');
-let productQuantityControlInc = document.querySelectorAll('.product__quantity-control_inc');
+let productQuantityControlDec = Array.from(document.querySelectorAll('.product__quantity-control_dec'));
+let productQuantityControlInc = Array.from(document.querySelectorAll('.product__quantity-control_inc'));
 let cartProducts = document.querySelector('.cart__products');
-let cartProduct = document.querySelectorAll('.cart__product');
-let productAdd = document.querySelectorAll('.product__add');
+let cartProduct; /*= Array.from(document.getElementsByClassName('cart__product'));*/
+let productAdd = Array.from(document.querySelectorAll('.product__add'));
 let products = document.querySelector('.products');
 let product = document.querySelectorAll('.product');
 let productImage = document.querySelectorAll('.product__image');
+let cartProductCount; /*= document.getElementsByClassName('cart__product-count');*/
 
-
-let cartId = 0;
-let cartSrc = '';
-let cartCount = 0;
+let cartId;
+let cartSrc;
+let cartCount;
 
 //  создание карточки товара в корзине
 function addProduct (cartId, cartSrc, cartCount) {
@@ -20,162 +20,74 @@ function addProduct (cartId, cartSrc, cartCount) {
         <img class="cart__product-image" src="${cartSrc}">
         <div class="cart__product-count">${cartCount}</div>
         <a href="#" class="cart__remove">&times;</a>
-  </div>`);
+    </div>`
+  );
 }
 
-// проверка на дублирующие товары. сложение в первый и удаление дублирующего
-/* function dublicateRemove(cartId, cartCount) {
-  for(let i = 0; i < cartProduct.length; i++){
-    
+// + - товара
+productQuantityControlDec.forEach((element, index) => { 
+  element.addEventListener(
+  "click",  
+    function () {
+      if (productQuantityValue[index].textContent >= 2) {
+        productQuantityValue[index].textContent = Number(productQuantityValue[index].textContent) - 1;
+      } 
+    });
+});
 
-    if(cartProduct.item(i).dataset.id == cartId){
-     
-      cartProduct.item(i).setAtribute('data-count', Number(cartProduct.item(i).dataset.count) + Number(cartCount));
-  cartProduct.lastChild.remove();
-    }        
-  }
-}*/
+productQuantityControlInc.forEach((element, index) => { 
+  element.addEventListener(
+  "click",  
+    () => {
+      productQuantityValue[index].textContent = Number(productQuantityValue[index].textContent) + 1;
+    });
+});
 
-// икра минтая
-productQuantityControlDec.item(0).addEventListener(
-  'click',
-  function () { 
-    if (productQuantityValue.item(0).textContent >= 2) {
-      productQuantityValue.item(0).textContent = Number(productQuantityValue.item(0).textContent) - 1;
-    }    
-  }  
-);
-
-productQuantityControlInc.item(0).addEventListener(
-  'click',
-  () => {
-    productQuantityValue.item(0).textContent = Number(productQuantityValue.item(0).textContent) + 1;
-  }
-);
-
-// повар взрослый
-productQuantityControlDec.item(1).addEventListener(
-  'click',
-  function () { 
-    if (productQuantityValue.item(1).textContent >= 2) {
-      productQuantityValue.item(1).textContent = Number(productQuantityValue.item(0).textContent) - 1;
-    }    
-  }  
-);
-
-productQuantityControlInc.item(1).addEventListener(
-  'click',
-  () => {
-    productQuantityValue.item(1).textContent = Number(productQuantityValue.item(1).textContent) + 1;
-  }
-);
-
-// щука
-productQuantityControlDec.item(2).addEventListener(
-  'click',
-  function () { 
-    if (productQuantityValue.item(2).textContent >= 2) {
-      productQuantityValue.item(2).textContent = Number(productQuantityValue.item(2).textContent) - 1;
-    }    
-  }  
-);
-
-productQuantityControlInc.item(2).addEventListener(
-  'click',
-  () => {
-    productQuantityValue.item(2).textContent = Number(productQuantityValue.item(2).textContent) + 1;
-  }
-);
-
-// краб
-productQuantityControlDec.item(3).addEventListener(
-  'click',
-  function () { 
-    if (productQuantityValue.item(3).textContent >= 2) {
-      productQuantityValue.item(3).textContent = Number(productQuantityValue.item(3).textContent) - 1;
-    }    
-  }  
-);
-
-productQuantityControlInc.item(3).addEventListener(
-  'click',
-  () => {
-    productQuantityValue.item(3).textContent = Number(productQuantityValue.item(3).textContent) + 1;
-  }
-);
+// кнопка добавить
+/*productAdd.forEach((element, index) => { 
+  element.addEventListener(
+  "click",  
+    () => {
+      cartId = product[index].dataset.id;
+      cartSrc = productImage[index].src;
+      cartCount = Number(productQuantityValue[index].textContent); 
+      addProduct(cartId, cartSrc, cartCount);
+      dublicateRemove(cartId, cartCount);
+    });
+});*/
 
 
-productAdd.item(0).addEventListener(
-  'click',
-  () => {  
-    cartId = product.item(0).dataset.id;
-    cartSrc = productImage.item(0).src;
-    cartCount = Number(productQuantityValue.item(0).textContent); 
-    addProduct(cartId, cartSrc, cartCount);
-    
-    
-    Array.from(cartProducts.children).map(child => {
-      if (child.dataset.id === product.item(0).dataset.id) {
-        child.lastChild.textContent = productQuantityValue.item[0].textContent;
+productAdd.forEach((element, index) => { 
+  element.addEventListener(
+  "click",  
+    () => {
+      cartProduct = Array.from(document.getElementsByClassName('cart__product'));
+      cartProductCount = Array.from(document.getElementsByClassName('cart__product-count'));      
+
+      cartId = product[index].dataset.id;
+      cartSrc = productImage[index].src;
+      cartCount = Number(productQuantityValue[index].textContent); 
+      // const productInCard = cartProduct.find((elem) => { elem.dataset.id === cartId });
+      const productInCard = [...cartProducts.children].find((elem) => { elem.dataset.id === cartId });
+      
+      if(productInCard) {
+        console.log('увеличивать количество у productInCard');        
+        console.log('cartProductCount.textConten ' + cartProductCount.textContent);
       } else {
+        console.log('добавлять новый элемент продукта'); 
+        console.log('productInCard ' + productInCard);
+        console.log('cart__product-count ' + cartProductCount); 
+        
         addProduct(cartId, cartSrc, cartCount);
-      }
-    })
-  }
-);
+      } 
 
-
-    // dublicateRemove(cartId, cartCount);    
-    
-    //console.log(cartProducts.childNodes[cartProducts.childNodes.length - 1]);
-    //console.log(cartProducts.lastChild);        
-    /*
-    for(let i = 0; i < cartProduct.length; i++){
-      console.log('Это продукт ' + cartProduct.item(i).dataset);
-      console.log(cartProduct.item(i).dataset);
-      console.log(cartId);
-      console.log(cartProducts.childNodes[i]);
-
-      if(cartProduct.item(i).dataset.id == cartId){       
-        cartProduct.item(i).setAtribute('data-count', Number(cartProduct.item(i).dataset.count) + Number(cartCount));
-    cartProduct.lastChild.remove();
-      }  }  */    
-    
- 
-
-
-productAdd.item(1).addEventListener(
-  'click',
-  () => {  
-    cartId = product.item(1).dataset.id;
-    cartSrc = productImage.item(1).src;
-    cartCount = Number(productQuantityValue.item(1).textContent); 
-    addProduct(cartId, cartSrc, cartCount);
-    dublicateRemove(cartId, cartCount);
-  }
-);
-
-productAdd.item(2).addEventListener(
-  'click',
-  () => {  
-    cartId = product.item(2).dataset.id;
-    cartSrc = productImage.item(2).src;
-    cartCount = Number(productQuantityValue.item(2).textContent); 
-    addProduct(cartId, cartSrc, cartCount);
-    dublicateRemove(cartId, cartCount);
-  }
-);
-
-productAdd.item(3).addEventListener(
-  'click',
-  () => {  
-    cartId = product.item(3).dataset.id;
-    cartSrc = productImage.item(3).src;
-    cartCount = Number(productQuantityValue.item(3).textContent); 
-    addProduct(cartId, cartSrc, cartCount);
-    dublicateRemove(cartId, cartCount);
-  }
-);
+      console.log('cartProducts.children id ' + cartProducts.children[index].dataset.id);
+      console.log('cartProducts.children innerText ' + cartProducts.children[index].innerText);
+      console.log('cartProducts.children length ' + cartProducts.children.length);
+      console.log(cartProduct[0].textContent);
+      console.log(cartProduct[1].textContent);
+    });
+});
 
 // удаление товара из корзины
 cartProducts.addEventListener(
