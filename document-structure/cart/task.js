@@ -9,11 +9,7 @@ let product = document.querySelectorAll('.product');
 let productImage = document.querySelectorAll('.product__image');
 let cartProductCount = document.getElementsByClassName('cart__product-count');
 
-let cartId;
-let cartSrc;
-let cartCount;
 let cartsArr = [];
-let cartName;
 
 //  создание карточки товара в корзине
 function addProduct (cartId, cartSrc, cartCount) {
@@ -26,7 +22,6 @@ function addProduct (cartId, cartSrc, cartCount) {
   );
   cartsArr.push({
       id: cartId,
-      title: cartTitle,
       src: cartSrc,
       count: cartCount
   }); 
@@ -55,35 +50,20 @@ productAdd.forEach((element, index) => {
   element.addEventListener(
   "click",  
     () => {
-      cartId = product[index].dataset.id;
-      cartSrc = productImage[index].src;
-      cartCount = Number(productQuantityValue[index].textContent); 
-      cartTitle = product[index].querySelector('.product__title').textContent;
+      let cartId = product[index].dataset.id;
+      let cartSrc = productImage[index].src;
+      let cartCount = Number(productQuantityValue[index].textContent); 
+
       
-      function isElemFind(element) {
-        return element.id === cartId;
-      }
-      
-      let productInCard = cartsArr.find(isElemFind);
-      
-      console.log('-Начало- productInCard ' + productInCard); 
-      console.log('cart__product-count  ' + document.getElementsByClassName('cart__product-count')); 
-      console.log('cart__product-count  ' + document.getElementsByClassName('cart__product-count').textContent); 
+      let productInCard = cartsArr.find((element) => { return element.id === cartId; });
       
       if(productInCard) {
-        console.log('увеличивать количество у productInCard'); 
-        
         productInCard.count = Number(productInCard.count) + Number(cartCount);
         console.log('productInCard.count ' + productInCard.count);
         
-        //cartProducts.children.textContent = productInCard.count;  
-        document.getElementsByClassName('cart__product-count').textContent = productInCard.count; 
-        console.log('cart__product-count  ' + document.getElementsByClassName('cart__product-count').textContent); 
-
-        
+        cartProducts.children.textContent = productInCard.count;
       } else {
-        console.log('добавлять новый элемент продукта'); 
-        addProduct(cartId, cartSrc, cartCount);
+         addProduct(cartId, cartSrc, cartCount);
       }
     });
 });
